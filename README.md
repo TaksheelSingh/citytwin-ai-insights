@@ -1,73 +1,133 @@
-# Welcome to your Lovable project
 
-## Project info
+# AI-Powered Digital Twin for Smart Cities
 
-**URL**: https://lovable.dev/projects/63aff028-91a1-4fab-b75c-4e07d241c61e
+This project provides a comprehensive digital twin platform for smart city management, featuring real-time traffic analysis, air quality monitoring, and energy consumption tracking with AI-powered predictions.
 
-## How can I edit this code?
+## Features
 
-There are several ways of editing your application.
+- **Interactive Dashboard** with real-time data visualization
+- **Traffic Analysis** with LSTM-based predictive modeling
+- **Air Quality Monitoring** with regression-based forecasting
+- **Energy Consumption Tracking** with cluster analysis
+- **Interactive Maps** using Leaflet.js and OpenStreetMap
+- **Responsive Design** for desktop and mobile devices
 
-**Use Lovable**
+## Project Structure
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/63aff028-91a1-4fab-b75c-4e07d241c61e) and start prompting.
+The project follows a monolithic architecture with these key components:
 
-Changes made via Lovable will be committed automatically to this repo.
+```
+📦 citytwin-ai-insights
+ ┣ 📂 frontend (React.js)
+ ┃ ┣ 📂 src
+ ┃ ┃ ┣ 📂 components
+ ┃ ┃ ┣ 📂 pages
+ ┃ ┃ ┣ 📂 api
+ ┃ ┃ ┣ 📂 hooks
+ ┃ ┃ ┣ 📂 lib
+ ┃ ┃ ┗ 📜 main.tsx
+ ┃ ┣ 📜 index.html
+ ┣ 📂 backend (FastAPI)
+ ┃ ┣ 📂 app
+ ┃ ┃ ┣ 📂 api
+ ┃ ┃ ┣ 📂 models
+ ┃ ┃ ┣ 📂 services
+ ┃ ┃ ┗ 📜 main.py
+ ┃ ┣ 📂 ml
+ ┃ ┃ ┣ 📂 traffic
+ ┃ ┃ ┣ 📂 air_quality
+ ┃ ┃ ┗ 📂 energy
+ ┣ 📂 database
+ ┃ ┣ 📂 migrations
+ ┃ ┣ 📂 schemas
+ ┃ ┗ 📂 seeds
+ ┣ 📂 docker
+ ┃ ┣ 📜 Dockerfile.frontend
+ ┃ ┣ 📜 Dockerfile.backend
+ ┃ ┗ 📜 docker-compose.yml
+ ┣ 📜 .env.example
+ ┗ 📜 README.md
+```
 
-**Use your preferred IDE**
+## Technology Stack
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Frontend
+- React.js with TypeScript
+- Tailwind CSS for styling
+- shadcn/ui component library
+- Recharts for data visualization
+- Leaflet.js with React-Leaflet for mapping
+- Axios for API requests
+- React Query for state management
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Backend (Currently Mocked)
+- FastAPI (Python)
+- Pydantic for data validation
+- SQLAlchemy for PostgreSQL integration
+- PyMongo for MongoDB integration
+- TensorFlow/PyTorch for ML models:
+  - LSTM for traffic prediction
+  - Regression models for air quality forecasting
+  - K-means clustering for energy consumption patterns
 
-Follow these steps:
+### Database (Currently Mocked)
+- PostgreSQL for structured data
+- MongoDB for sensor data
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### DevOps
+- Docker & Docker Compose
+- Environment variables for configuration
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+## Getting Started
 
-# Step 3: Install the necessary dependencies.
-npm i
+### Prerequisites
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+- Node.js & npm
+- Python 3.8+ (for backend once implemented)
+- Docker & Docker Compose (for containerization)
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd citytwin-ai-insights
+```
+
+2. Install frontend dependencies:
+```bash
+npm install
+```
+
+3. Start the development server:
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+4. Open your browser and navigate to:
+```
+http://localhost:8080
+```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Current Implementation Status
 
-**Use GitHub Codespaces**
+This repository currently provides a frontend implementation with mock API data. The backend FastAPI service and database integrations will be implemented in future versions.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Future Development
 
-## What technologies are used for this project?
+- Implement the FastAPI backend with real AI models
+- Connect to actual PostgreSQL and MongoDB databases
+- Add real-time data integration with city IoT sensors
+- Implement user authentication and authorization
+- Add administrative tools for city managers
+- Create mobile app versions
 
-This project is built with:
+## License
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-## How can I deploy this project?
+## Acknowledgments
 
-Simply open [Lovable](https://lovable.dev/projects/63aff028-91a1-4fab-b75c-4e07d241c61e) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes it is!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+- OpenStreetMap for mapping data
+- Recharts for visualization components
+- Shadcn UI for the component library
