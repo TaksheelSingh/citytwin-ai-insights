@@ -7,6 +7,10 @@ interface EnergyDataPoint {
   value: number;
 }
 
+interface CombinedDataPoint extends EnergyDataPoint {
+  isPrediction?: boolean;
+}
+
 interface EnergyChartProps {
   data?: EnergyDataPoint[];
   predictions?: EnergyDataPoint[];
@@ -14,7 +18,7 @@ interface EnergyChartProps {
 
 const EnergyChart: React.FC<EnergyChartProps> = ({ data = [], predictions = [] }) => {
   // Combine historical data and predictions for display
-  const combinedData = [...data];
+  const combinedData: CombinedDataPoint[] = [...data];
   
   // Add a reference line where predictions start
   const predictionStartTime = predictions.length > 0 ? predictions[0].time : null;
@@ -64,18 +68,20 @@ const EnergyChart: React.FC<EnergyChartProps> = ({ data = [], predictions = [] }
           name="Historical"
           activeDot={{ r: 6 }}
           strokeWidth={2}
+          data={combinedData.filter(d => !d.isPrediction)}
         />
         
         {/* Prediction area */}
         <Area 
           type="monotone" 
-          dataKey="isPrediction" 
+          dataKey="value" 
           stroke="#10b981" 
           fill="#10b98150" 
           name="Prediction"
           strokeDasharray="5 5"
           activeDot={{ r: 6 }}
           strokeWidth={2}
+          data={combinedData.filter(d => d.isPrediction)}
         />
         
         {/* Reference line for prediction start */}

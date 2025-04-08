@@ -7,6 +7,10 @@ interface TrafficDataPoint {
   value: number;
 }
 
+interface CombinedDataPoint extends TrafficDataPoint {
+  isPrediction?: boolean;
+}
+
 interface TrafficChartProps {
   data?: TrafficDataPoint[];
   predictions?: TrafficDataPoint[];
@@ -14,7 +18,7 @@ interface TrafficChartProps {
 
 const TrafficChart: React.FC<TrafficChartProps> = ({ data = [], predictions = [] }) => {
   // Combine historical data and predictions for display
-  const combinedData = [...data];
+  const combinedData: CombinedDataPoint[] = [...data];
   
   // Add a reference line where predictions start
   const predictionStartTime = predictions.length > 0 ? predictions[0].time : null;
@@ -51,7 +55,7 @@ const TrafficChart: React.FC<TrafficChartProps> = ({ data = [], predictions = []
         <Legend 
           payload={[
             { value: 'Historical Data', type: 'line', color: '#3b82f6' },
-            { value: 'AI Prediction', type: 'line', color: '#10b981', strokeDasharray: '5 5' }
+            { value: 'AI Prediction', type: 'line', color: '#10b981' }
           ]}
         />
         
@@ -65,12 +69,13 @@ const TrafficChart: React.FC<TrafficChartProps> = ({ data = [], predictions = []
           strokeWidth={2}
           name="Historical"
           connectNulls
+          data={combinedData.filter(d => !d.isPrediction)}
         />
         
         {/* Prediction line */}
         <Line 
           type="monotone" 
-          dataKey="isPrediction" 
+          dataKey="value" 
           stroke="#10b981" 
           strokeDasharray="5 5" 
           dot={{ r: 3 }} 
@@ -78,6 +83,7 @@ const TrafficChart: React.FC<TrafficChartProps> = ({ data = [], predictions = []
           strokeWidth={2}
           name="Prediction"
           connectNulls
+          data={combinedData.filter(d => d.isPrediction)}
         />
         
         {/* Reference line for prediction start */}

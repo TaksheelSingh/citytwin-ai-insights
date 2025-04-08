@@ -1,10 +1,14 @@
 
 import React from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine, ReferenceArea } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from 'recharts';
 
 interface AQIDataPoint {
   time: string;
   value: number;
+}
+
+interface CombinedDataPoint extends AQIDataPoint {
+  isPrediction?: boolean;
 }
 
 interface AirQualityChartProps {
@@ -14,7 +18,7 @@ interface AirQualityChartProps {
 
 const AirQualityChart: React.FC<AirQualityChartProps> = ({ data = [], predictions = [] }) => {
   // Combine historical data and predictions for display
-  const combinedData = [...data];
+  const combinedData: CombinedDataPoint[] = [...data];
   
   // Add a reference line where predictions start
   const predictionStartTime = predictions.length > 0 ? predictions[0].time : null;
@@ -26,16 +30,6 @@ const AirQualityChart: React.FC<AirQualityChartProps> = ({ data = [], prediction
       isPrediction: true, // Mark as prediction for styling
     });
   });
-  
-  // AQI thresholds for coloring
-  const aqiThresholds = [
-    { range: [0, 50], label: 'Good', color: 'rgba(0, 228, 0, 0.2)' },
-    { range: [51, 100], label: 'Moderate', color: 'rgba(255, 255, 0, 0.2)' },
-    { range: [101, 150], label: 'Unhealthy for Sensitive Groups', color: 'rgba(255, 126, 0, 0.2)' },
-    { range: [151, 200], label: 'Unhealthy', color: 'rgba(255, 0, 0, 0.2)' },
-    { range: [201, 300], label: 'Very Unhealthy', color: 'rgba(143, 63, 151, 0.2)' },
-    { range: [301, 500], label: 'Hazardous', color: 'rgba(126, 0, 35, 0.2)' }
-  ];
   
   return (
     <ResponsiveContainer width="100%" height="100%">
@@ -50,38 +44,20 @@ const AirQualityChart: React.FC<AirQualityChartProps> = ({ data = [], prediction
           tick={{ fontSize: 12 }}
         />
         <YAxis 
-          label={{ value: 'Air Quality Index (AQI)', angle: -90, position: 'insideLeft', style: { textAnchor: 'middle' } }}
+          label={{ value: 'Air Quality Index', angle: -90, position: 'insideLeft', style: { textAnchor: 'middle' } }}
           tick={{ fontSize: 12 }}
-          domain={[0, 300]}
         />
         <Tooltip 
           contentStyle={{ backgroundColor: 'rgba(255, 255, 255, 0.9)', borderRadius: 4, border: '1px solid #ddd' }}
-          formatter={(value: number, name: string) => [`${value}`, name === 'isPrediction' ? 'Predicted AQI' : 'AQI']}
+          formatter={(value: number, name: string) => [`${value}`, name === 'isPrediction' ? 'Predicted' : 'Historical']}
           labelFormatter={(time) => `Time: ${time}`}
         />
         <Legend 
           payload={[
-            { value: 'Historical AQI', type: 'line', color: '#3b82f6' },
-            { value: 'Predicted AQI', type: 'line', color: '#10b981', strokeDasharray: '5 5' }
+            { value: 'Historical Data', type: 'line', color: '#3b82f6' },
+            { value: 'AI Prediction', type: 'line', color: '#10b981' }
           ]}
         />
-        
-        {/* AQI threshold areas */}
-        {aqiThresholds.map((threshold, index) => (
-          <ReferenceArea 
-            key={`threshold-${index}`}
-            y1={threshold.range[0]} 
-            y2={threshold.range[1]}
-            fill={threshold.color}
-            fillOpacity={0.3}
-            label={{ 
-              value: threshold.label, 
-              position: 'insideRight',
-              fill: '#666',
-              fontSize: 10
-            }}
-          />
-        ))}
         
         {/* Historical data line */}
         <Line 
@@ -98,7 +74,7 @@ const AirQualityChart: React.FC<AirQualityChartProps> = ({ data = [], prediction
         {/* Prediction line */}
         <Line 
           type="monotone" 
-          dataKey="isPrediction" 
+          dataKey="value" 
           stroke="#10b981" 
           strokeDasharray="5 5" 
           dot={{ r: 3 }} 
@@ -106,6 +82,7 @@ const AirQualityChart: React.FC<AirQualityChartProps> = ({ data = [], prediction
           strokeWidth={2}
           name="Prediction"
           connectNulls
+          data={combinedData.filter(d => d.isPrediction)}
         />
         
         {/* Reference line for prediction start */}
