@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Calendar } from '@/components/ui/calendar';
@@ -8,11 +7,23 @@ import { Label } from '@/components/ui/label';
 import { Filter, CalendarDays } from 'lucide-react';
 import { format } from 'date-fns';
 import { Checkbox } from '@/components/ui/checkbox';
+import { fetchEnergyData } from '@/api/energy'; // Assuming this is the function to fetch energy data based on city
 
 const EnergyFilters = () => {
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [area, setArea] = useState("all");
-  
+  const [city, setCity] = useState("delhi"); // New state for city
+  const [energyData, setEnergyData] = useState<any>(null);
+
+  useEffect(() => {
+    // Fetch the data based on the selected city
+    fetchEnergyData(city).then((data) => setEnergyData(data));
+  }, [city]); // Update the data when the city changes
+
+  const handleCityChange = (value: string) => {
+    setCity(value);
+  };
+
   return (
     <div className="flex items-center gap-2">
       <Popover>
@@ -31,6 +42,19 @@ const EnergyFilters = () => {
         </PopoverContent>
       </Popover>
       
+      {/* Dropdown for selecting city */}
+      <Select value={city} onValueChange={handleCityChange}>
+        <SelectTrigger className="w-[160px]">
+          <SelectValue placeholder="Select city" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="delhi">Delhi</SelectItem>
+          <SelectItem value="mumbai">Mumbai</SelectItem>
+          <SelectItem value="bangalore">Bangalore</SelectItem>
+        </SelectContent>
+      </Select>
+      
+      {/* Area dropdown */}
       <Select value={area} onValueChange={setArea}>
         <SelectTrigger className="w-[160px]">
           <SelectValue placeholder="Select area" />
@@ -95,6 +119,14 @@ const EnergyFilters = () => {
           </div>
         </PopoverContent>
       </Popover>
+
+      {/* Display energy data based on the city */}
+      {energyData && (
+        <div className="mt-4">
+          <h2>Energy Data for {city.charAt(0).toUpperCase() + city.slice(1)}</h2>
+          <pre>{JSON.stringify(energyData, null, 2)}</pre> {/* Displaying energy data for the selected city */}
+        </div>
+      )}
     </div>
   );
 };

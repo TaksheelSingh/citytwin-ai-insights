@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useQuery } from '@tanstack/react-query';
@@ -9,11 +8,13 @@ import TrafficChart from './TrafficChart';
 import TrafficStats from './TrafficStats';
 import TrafficFilters from './TrafficFilters';
 import { AlertCircle } from 'lucide-react';
+import Dropdown from '@/components/Dropdown'; // Assuming Dropdown component exists
 
 const TrafficDashboard = () => {
+  const [city, setCity] = useState<string>('delhi'); // Default city
   const { data, isLoading, error } = useQuery({
-    queryKey: ['trafficData'],
-    queryFn: fetchTrafficData,
+    queryKey: ['trafficData', city], // Include city to refetch data when it changes
+    queryFn: () => fetchTrafficData(city), // Fetch traffic data based on selected city
   });
 
   if (isLoading) {
@@ -51,7 +52,7 @@ const TrafficDashboard = () => {
             Real-time traffic flow and predictive congestion data.
           </p>
         </div>
-        <TrafficFilters />
+        <Dropdown setCity={setCity} /> {/* Add the dropdown for city selection */}
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useQuery } from '@tanstack/react-query';
@@ -10,12 +9,18 @@ import EnergyStats from './EnergyStats';
 import EnergyFilters from './EnergyFilters';
 import EnergyDistribution from './EnergyDistribution';
 import { AlertCircle } from 'lucide-react';
+import Dropdown from '@/components/Dropdown';  // Correct the path if necessary
 
 const EnergyDashboard = () => {
+  const [city, setCity] = useState<string>('delhi'); // Manage the selected city
   const { data, isLoading, error } = useQuery({
-    queryKey: ['energyData'],
-    queryFn: fetchEnergyData,
+    queryKey: ['energyData', city], // Refetch data when city changes
+    queryFn: () => fetchEnergyData(city), // Fetch data based on selected city
   });
+
+  const handleCityChange = (newCity: string) => {
+    setCity(newCity); // Set the selected city
+  };
 
   if (isLoading) {
     return (
@@ -52,7 +57,7 @@ const EnergyDashboard = () => {
             Real-time energy usage monitoring and AI-powered efficiency insights.
           </p>
         </div>
-        <EnergyFilters />
+        <Dropdown setCity={handleCityChange} /> {/* Dropdown to change city */}
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

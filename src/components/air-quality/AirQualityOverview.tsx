@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Progress } from '@/components/ui/progress';
 import { cn } from '@/lib/utils';
@@ -19,6 +18,7 @@ interface AirQualityOverviewProps {
 }
 
 const AirQualityOverview: React.FC<AirQualityOverviewProps> = ({ data, isOverview }) => {
+  // Function to determine AQI color
   const getAQIColor = (aqi: number) => {
     if (aqi <= 50) return 'bg-green-500';
     if (aqi <= 100) return 'bg-yellow-500';
@@ -26,6 +26,7 @@ const AirQualityOverview: React.FC<AirQualityOverviewProps> = ({ data, isOvervie
     return 'bg-red-500';
   };
 
+  // Function to get AQI status
   const getAQIStatus = (aqi: number) => {
     if (aqi <= 50) return 'Good';
     if (aqi <= 100) return 'Moderate';
@@ -35,12 +36,14 @@ const AirQualityOverview: React.FC<AirQualityOverviewProps> = ({ data, isOvervie
     return 'Hazardous';
   };
 
+  // Function to get change indicator
   const getChangeIndicator = (change: number) => {
     if (change > 0) return { icon: '↑', color: 'text-red-500' };
     if (change < 0) return { icon: '↓', color: 'text-green-500' };
     return { icon: '→', color: 'text-gray-500' };
   };
 
+  // Get the change indicator based on the change in AQI
   const changeIndicator = getChangeIndicator(data.change);
 
   if (isOverview) {
@@ -71,7 +74,7 @@ const AirQualityOverview: React.FC<AirQualityOverviewProps> = ({ data, isOvervie
         </div>
         <Progress value={(data.aqi / 300) * 100} className={cn("h-2", getAQIColor(data.aqi))} />
       </div>
-      
+
       <div className="flex items-center justify-between">
         <span className="text-sm">Prediction (24h)</span>
         <div className="flex items-center gap-2">
@@ -81,7 +84,7 @@ const AirQualityOverview: React.FC<AirQualityOverviewProps> = ({ data, isOvervie
           </div>
         </div>
       </div>
-      
+
       <div>
         <h4 className="text-sm font-medium mb-2">Key Pollutants</h4>
         <div className="space-y-2">

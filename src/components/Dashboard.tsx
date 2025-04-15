@@ -9,14 +9,17 @@ import AirQualityOverview from './air-quality/AirQualityOverview';
 import EnergyOverview from './energy/EnergyOverview';
 import DashboardFilters from './DashboardFilters';
 import { AlertCircle } from 'lucide-react';
-import Dropdown from '@/Dropdown/Dropdown';
+import Dropdown from '@/components/Dropdown'; // Ensure this path is correct
 
 const Dashboard = () => {
   const [city, setCity] = useState<string>('delhi'); // Default to Delhi
   const { data, isLoading, error } = useQuery({
-    queryKey: ['dashboardOverview', city],
+    queryKey: ['dashboardOverview', city], // Pass city to refetch the data on city change
     queryFn: () => fetchOverviewData(city),
   });
+
+  // Log data to check structure
+  console.log(data);
 
   if (isLoading) {
     return (
@@ -53,6 +56,7 @@ const Dashboard = () => {
             Real-time insights and AI-powered predictions for urban management.
           </p>
         </div>
+        {/* Dropdown for City Selection */}
         <Dropdown setCity={setCity} />
       </div>
 
@@ -63,7 +67,11 @@ const Dashboard = () => {
             <CardDescription>Current traffic levels across the city</CardDescription>
           </CardHeader>
           <CardContent>
-            {data && <TrafficOverview data={data.traffic} isOverview={true} />}
+            {data && data.traffic ? (
+              <TrafficOverview data={data.traffic} isOverview={true} />
+            ) : (
+              <div>Loading Traffic Data...</div>
+            )}
           </CardContent>
         </Card>
 
@@ -73,7 +81,11 @@ const Dashboard = () => {
             <CardDescription>Average AQI levels and forecasts</CardDescription>
           </CardHeader>
           <CardContent>
-            {data && <AirQualityOverview data={data.airQuality} isOverview={true} />}
+            {data && data.airQuality ? (
+              <AirQualityOverview data={data.airQuality} isOverview={true} />
+            ) : (
+              <div>Loading Air Quality Data...</div>
+            )}
           </CardContent>
         </Card>
 
@@ -83,7 +95,11 @@ const Dashboard = () => {
             <CardDescription>Current energy usage patterns</CardDescription>
           </CardHeader>
           <CardContent>
-            {data && <EnergyOverview data={data.energy} isOverview={true} />}
+            {data && data.energy ? (
+              <EnergyOverview data={data.energy} isOverview={true} />
+            ) : (
+              <div>Loading Energy Data...</div>
+            )}
           </CardContent>
         </Card>
       </div>
@@ -109,7 +125,11 @@ const Dashboard = () => {
                 <CardTitle>Traffic Insights</CardTitle>
               </CardHeader>
               <CardContent>
-                {data && <TrafficOverview data={data.traffic} isOverview={false} />}
+                {data && data.traffic ? (
+                  <TrafficOverview data={data.traffic} isOverview={false} />
+                ) : (
+                  <div>Loading Traffic Insights...</div>
+                )}
               </CardContent>
             </Card>
             <Card>
@@ -117,7 +137,11 @@ const Dashboard = () => {
                 <CardTitle>Air Quality Trends</CardTitle>
               </CardHeader>
               <CardContent>
-                {data && <AirQualityOverview data={data.airQuality} isOverview={false} />}
+                {data && data.airQuality ? (
+                  <AirQualityOverview data={data.airQuality} isOverview={false} />
+                ) : (
+                  <div>Loading Air Quality Trends...</div>
+                )}
               </CardContent>
             </Card>
             <Card>
@@ -125,7 +149,11 @@ const Dashboard = () => {
                 <CardTitle>Energy Distribution</CardTitle>
               </CardHeader>
               <CardContent>
-                {data && <EnergyOverview data={data.energy} isOverview={false} />}
+                {data && data.energy ? (
+                  <EnergyOverview data={data.energy} isOverview={false} />
+                ) : (
+                  <div>Loading Energy Distribution...</div>
+                )}
               </CardContent>
             </Card>
           </div>

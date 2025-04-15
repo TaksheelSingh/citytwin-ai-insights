@@ -1,5 +1,6 @@
 
-import React from 'react';
+import React, { useState } from 'react'; // Ensure useState is imported from React
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useQuery } from '@tanstack/react-query';
@@ -11,10 +12,13 @@ import AirQualityFilters from './AirQualityFilters';
 import { AlertCircle } from 'lucide-react';
 
 const AirQualityDashboard = () => {
-  const { data, isLoading, error } = useQuery({
-    queryKey: ['airQualityData'],
-    queryFn: fetchAirQualityData,
-  });
+  
+const [selectedCity, setSelectedCity] = useState("delhi");
+const { data, isLoading, error } = useQuery({
+  queryKey: ['airQualityData', selectedCity],
+  queryFn: () => fetchAirQualityData(selectedCity),
+});
+
 
   if (isLoading) {
     return (

@@ -1,13 +1,11 @@
-
 import React from 'react';
-import TrafficDashboard from '@/components/traffic/TrafficDashboard';
-import AppLayout from '@/components/layout/AppLayout';
+import TrafficDashboard from '@/components/traffic/TrafficDashboard'; // Corrected import
 
-const Traffic = () => {
+const Traffic: React.FC = () => {
   return (
-    <AppLayout>
-      <TrafficDashboard />
-    </AppLayout>
+    <div>
+      <TrafficDashboard /> {/* Render TrafficDashboard here */}
+    </div>
   );
 };
 
