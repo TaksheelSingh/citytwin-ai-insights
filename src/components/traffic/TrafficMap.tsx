@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { MapContainer, TileLayer, Marker, Popup, Polyline } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -36,15 +35,14 @@ interface TrafficMapProps {
 }
 
 const TrafficMap: React.FC<TrafficMapProps> = ({ trafficData }) => {
-  const defaultCenter: [number, number] = [40.7128, -74.0060]; // NYC coordinates
-  
-  // Helper function to determine color based on congestion level
+  const defaultCenter: [number, number] = [22.9734, 78.6569]; // Center of India
+
   const getCongestionColor = (level: number) => {
-    if (level < 3) return '#10b981'; // green for low congestion
-    if (level < 7) return '#f59e0b'; // amber for medium congestion
-    return '#ef4444'; // red for high congestion
+    if (level < 3) return '#10b981';
+    if (level < 7) return '#f59e0b';
+    return '#ef4444';
   };
-  
+
   if (!trafficData) {
     return (
       <div className="flex items-center justify-center h-full bg-slate-100">
@@ -52,11 +50,11 @@ const TrafficMap: React.FC<TrafficMapProps> = ({ trafficData }) => {
       </div>
     );
   }
-  
+
   return (
     <MapContainer 
       center={defaultCenter} 
-      zoom={13} 
+      zoom={5} 
       style={{ height: '100%', width: '100%' }}
       zoomControl={false}
     >
@@ -64,8 +62,7 @@ const TrafficMap: React.FC<TrafficMapProps> = ({ trafficData }) => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      
-      {/* Traffic Routes as Polylines */}
+
       {trafficData.routes.map((route) => (
         <Polyline
           key={`route-${route.id}`}
@@ -84,8 +81,7 @@ const TrafficMap: React.FC<TrafficMapProps> = ({ trafficData }) => {
           </Popup>
         </Polyline>
       ))}
-      
-      {/* Traffic Points as Markers */}
+
       {trafficData.points.map((point) => (
         <Marker 
           key={`point-${point.id}`}

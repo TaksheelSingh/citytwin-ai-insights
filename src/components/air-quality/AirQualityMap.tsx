@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { MapContainer, TileLayer, Marker, Popup, Circle } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -28,18 +27,17 @@ interface AirQualityMapProps {
 }
 
 const AirQualityMap: React.FC<AirQualityMapProps> = ({ aqiData }) => {
-  const defaultCenter: [number, number] = [40.7128, -74.0060]; // NYC coordinates
-  
-  // Helper function to determine color based on AQI level
+  const defaultCenter: [number, number] = [22.9734, 78.6569]; // Center of India
+
   const getAQIColor = (aqi: number) => {
-    if (aqi <= 50) return '#10b981'; // green for good
-    if (aqi <= 100) return '#f59e0b'; // amber for moderate
-    if (aqi <= 150) return '#fb923c'; // orange for unhealthy for sensitive groups
-    if (aqi <= 200) return '#ef4444'; // red for unhealthy
-    if (aqi <= 300) return '#9333ea'; // purple for very unhealthy
-    return '#7f1d1d'; // maroon for hazardous
+    if (aqi <= 50) return '#10b981';
+    if (aqi <= 100) return '#f59e0b';
+    if (aqi <= 150) return '#fb923c';
+    if (aqi <= 200) return '#ef4444';
+    if (aqi <= 300) return '#9333ea';
+    return '#7f1d1d';
   };
-  
+
   const getAQIStatus = (aqi: number) => {
     if (aqi <= 50) return 'Good';
     if (aqi <= 100) return 'Moderate';
@@ -48,7 +46,7 @@ const AirQualityMap: React.FC<AirQualityMapProps> = ({ aqiData }) => {
     if (aqi <= 300) return 'Very Unhealthy';
     return 'Hazardous';
   };
-  
+
   if (!aqiData) {
     return (
       <div className="flex items-center justify-center h-full bg-slate-100">
@@ -56,34 +54,31 @@ const AirQualityMap: React.FC<AirQualityMapProps> = ({ aqiData }) => {
       </div>
     );
   }
-  
+
   return (
     <MapContainer 
-      center={defaultCenter} 
-      zoom={13} 
+      center={defaultCenter}
+      zoom={5} // Zoomed out to see India
       style={{ height: '100%', width: '100%' }}
       zoomControl={false}
     >
       <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        attribution='&copy; OpenStreetMap contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       
-      {/* AQI Monitoring Stations with Circles for Coverage/Intensity */}
       {aqiData.stations.map((station) => (
         <React.Fragment key={`station-${station.id}`}>
           <Circle
             center={[station.lat, station.lng]}
-            radius={1000} // 1km radius
-            pathOptions={{ 
+            radius={1000}
+            pathOptions={{
               color: getAQIColor(station.aqi),
               fillColor: getAQIColor(station.aqi),
               fillOpacity: 0.3
             }}
           />
-          <Marker 
-            position={[station.lat, station.lng]}
-          >
+          <Marker position={[station.lat, station.lng]}>
             <Popup>
               <div className="text-sm">
                 <h3 className="font-semibold">{station.name}</h3>

@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useQuery } from '@tanstack/react-query';
@@ -10,11 +9,13 @@ import AirQualityOverview from './air-quality/AirQualityOverview';
 import EnergyOverview from './energy/EnergyOverview';
 import DashboardFilters from './DashboardFilters';
 import { AlertCircle } from 'lucide-react';
+import Dropdown from '@/Dropdown/Dropdown';
 
 const Dashboard = () => {
+  const [city, setCity] = useState<string>('delhi'); // Default to Delhi
   const { data, isLoading, error } = useQuery({
-    queryKey: ['dashboardOverview'],
-    queryFn: fetchOverviewData,
+    queryKey: ['dashboardOverview', city],
+    queryFn: () => fetchOverviewData(city),
   });
 
   if (isLoading) {
@@ -52,7 +53,7 @@ const Dashboard = () => {
             Real-time insights and AI-powered predictions for urban management.
           </p>
         </div>
-        <DashboardFilters />
+        <Dropdown setCity={setCity} />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -65,7 +66,7 @@ const Dashboard = () => {
             {data && <TrafficOverview data={data.traffic} isOverview={true} />}
           </CardContent>
         </Card>
-        
+
         <Card>
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium">Air Quality</CardTitle>
@@ -75,7 +76,7 @@ const Dashboard = () => {
             {data && <AirQualityOverview data={data.airQuality} isOverview={true} />}
           </CardContent>
         </Card>
-        
+
         <Card>
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium">Energy Consumption</CardTitle>

@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
@@ -11,9 +10,9 @@ import { format } from 'date-fns';
 
 const AirQualityFilters = () => {
   const [date, setDate] = useState<Date | undefined>(new Date());
-  const [area, setArea] = useState("downtown");
+  const [city, setCity] = useState("delhi");
   const [aqiThreshold, setAQIThreshold] = useState([100]);
-  
+
   return (
     <div className="flex items-center gap-2">
       <Popover>
@@ -31,19 +30,18 @@ const AirQualityFilters = () => {
           />
         </PopoverContent>
       </Popover>
-      
-      <Select value={area} onValueChange={setArea}>
+
+      <Select value={city} onValueChange={setCity}>
         <SelectTrigger className="w-[160px]">
-          <SelectValue placeholder="Select area" />
+          <SelectValue placeholder="Select City" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="downtown">Downtown</SelectItem>
-          <SelectItem value="industrial">Industrial Zone</SelectItem>
-          <SelectItem value="residential">Residential Areas</SelectItem>
-          <SelectItem value="all">Entire City</SelectItem>
+          <SelectItem value="delhi">Delhi</SelectItem>
+          <SelectItem value="mumbai">Mumbai</SelectItem>
+          <SelectItem value="bangalore">Bangalore</SelectItem>
         </SelectContent>
       </Select>
-      
+
       <Popover>
         <PopoverTrigger asChild>
           <Button variant="outline" size="icon">
@@ -65,7 +63,7 @@ const AirQualityFilters = () => {
                 <span className="text-xs text-muted-foreground">Hazardous</span>
               </div>
             </div>
-            
+
             <div className="space-y-2">
               <Label>Pollutant Focus</Label>
               <Select defaultValue="all">
@@ -83,7 +81,7 @@ const AirQualityFilters = () => {
                 </SelectContent>
               </Select>
             </div>
-            
+
             <div className="flex justify-end">
               <Button size="sm">Apply Filters</Button>
             </div>

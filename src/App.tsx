@@ -1,4 +1,4 @@
-
+import React, { useState, useEffect } from 'react';
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -9,25 +9,65 @@ import Traffic from "./pages/Traffic";
 import AirQuality from "./pages/AirQuality";
 import Energy from "./pages/Energy";
 import NotFound from "./pages/NotFound";
+import { fetchAirQualityData } from './api/airQuality';
+import { fetchTrafficData } from './api/traffic';
+import { fetchEnergyData } from './api/energy';
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/traffic" element={<Traffic />} />
-          <Route path="/air-quality" element={<AirQuality />} />
-          <Route path="/energy" element={<Energy />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+const App: React.FC = () => {
+  const [selectedCity, setSelectedCity] = useState('delhi');  // Default to Delhi
+  const [airQualityData, setAirQualityData] = useState<any>(null);
+  const [trafficData, setTrafficData] = useState<any>(null);
+  const [energyData, setEnergyData] = useState<any>(null);
+
+  // Fetch Data based on the selected city
+  useEffect(() => {
+    const loadData = async () => {
+      const airQuality = await fetchAirQualityData(selectedCity);
+      const traffic = await fetchTrafficData(selectedCity);
+      const energy = await fetchEnergyData(selectedCity);
+
+      setAirQualityData(airQuality);
+      setTrafficData(traffic);
+      setEnergyData(energy);
+    };
+
+    loadData();
+  }, [selectedCity]);
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/traffic" element={<Traffic data={trafficData} />} />
+            <Route path="/air-quality" element={<AirQuality data={airQualityData} />} />
+            <Route path="/energy" element={<Energy data={energyData} />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+
+        {/* Dropdown for selecting city */}
+        <div className="city-selection">
+          <label htmlFor="city">Select City: </label>
+          <select
+            id="city"
+            value={selectedCity}
+            onChange={(e) => setSelectedCity(e.target.value)}
+            className="city-dropdown"
+          >
+            <option value="delhi">Delhi</option>
+            <option value="mumbai">Mumbai</option>
+            <option value="bangalore">Bangalore</option>
+          </select>
+        </div>
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;

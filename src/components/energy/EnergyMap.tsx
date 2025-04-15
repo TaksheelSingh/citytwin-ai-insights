@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, Circle } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
@@ -12,46 +11,39 @@ L.Icon.Default.mergeOptions({
   shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
 });
 
+// Energy data interface (similar to air quality)
 interface EnergyPoint {
   id: number;
   lat: number;
   lng: number;
-  usage: number;
-  capacity: number;
-  type: string;
-  name: string;
+  energyConsumption: number;  // Energy consumption in kWh
+  energyEfficiency: number;  // Efficiency rating (percentage)
+  peakDemand: number;       // Peak demand in kW
+  location: string;
   lastUpdate: string;
 }
 
 interface EnergyMapProps {
-  energyData?: {
+  energyData: {
     stations: EnergyPoint[];
   };
 }
 
 const EnergyMap: React.FC<EnergyMapProps> = ({ energyData }) => {
-  const defaultCenter: [number, number] = [40.7128, -74.0060]; // NYC coordinates
-  
-  // Helper function to determine color based on energy usage level
-  const getEnergyColor = (usage: number, capacity: number) => {
-    const percentUsage = (usage / capacity) * 100;
-    if (percentUsage < 60) return '#10b981'; // green for low usage
-    if (percentUsage < 80) return '#f59e0b'; // amber for medium usage
-    return '#ef4444'; // red for high usage
+  const defaultCenter: [number, number] = [20.5937, 78.9629]; // Center of India coordinates
+
+  // Helper function to determine color based on energy consumption
+  const getEnergyColor = (energyConsumption: number) => {
+    if (energyConsumption <= 100) return '#10b981'; // Green: Low consumption
+    if (energyConsumption <= 200) return '#f59e0b'; // Amber: Moderate consumption
+    if (energyConsumption <= 300) return '#f97316'; // Orange: High consumption
+    return '#ef4444'; // Red: Very high consumption
   };
-  
-  if (!energyData) {
-    return (
-      <div className="flex items-center justify-center h-full bg-slate-100">
-        <p>No energy data available.</p>
-      </div>
-    );
-  }
-  
+
   return (
     <MapContainer 
       center={defaultCenter} 
-      zoom={13} 
+      zoom={5}  // Zoomed out to show multiple locations
       style={{ height: '100%', width: '100%' }}
       zoomControl={false}
     >
@@ -60,15 +52,15 @@ const EnergyMap: React.FC<EnergyMapProps> = ({ energyData }) => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       
-      {/* Energy Stations with Circles for Capacity/Usage */}
+      {/* Energy Stations with Circles for Energy Consumption */}
       {energyData.stations.map((station) => (
         <React.Fragment key={`station-${station.id}`}>
           <Circle
             center={[station.lat, station.lng]}
             radius={800} // 800m radius
             pathOptions={{ 
-              color: getEnergyColor(station.usage, station.capacity),
-              fillColor: getEnergyColor(station.usage, station.capacity),
+              color: getEnergyColor(station.energyConsumption),
+              fillColor: getEnergyColor(station.energyConsumption),
               fillOpacity: 0.3
             }}
           />
@@ -77,12 +69,11 @@ const EnergyMap: React.FC<EnergyMapProps> = ({ energyData }) => {
           >
             <Popup>
               <div className="text-sm">
-                <h3 className="font-semibold">{station.name}</h3>
-                <p>Type: {station.type}</p>
-                <p>Current Usage: {station.usage.toLocaleString()} kWh</p>
-                <p>Capacity: {station.capacity.toLocaleString()} kWh</p>
-                <p>Usage: {((station.usage / station.capacity) * 100).toFixed(1)}%</p>
-                <p>Updated: {station.lastUpdate}</p>
+                <h3 className="font-semibold">{station.location}</h3>
+                <p>Energy Consumption: {station.energyConsumption} kWh</p>
+                <p>Energy Efficiency: {station.energyEfficiency}%</p>
+                <p>Peak Demand: {station.peakDemand} kW</p>
+                <p>Last Update: {station.lastUpdate}</p>
               </div>
             </Popup>
           </Marker>
@@ -92,4 +83,46 @@ const EnergyMap: React.FC<EnergyMapProps> = ({ energyData }) => {
   );
 };
 
-export default EnergyMap;
+// Example of energy data (similar to air quality data)
+const energyData = {
+  stations: [
+    {
+      id: 1,
+      lat: 28.6139,   // Delhi Latitude
+      lng: 77.2090,   // Delhi Longitude
+      energyConsumption: 250,  // kWh
+      energyEfficiency: 80,    // 80% efficiency
+      peakDemand: 500,         // Peak demand in kW
+      location: 'Delhi',
+      lastUpdate: '2025-04-13 10:00:00',
+    },
+    {
+      id: 2,
+      lat: 12.9716,   // Bangalore Latitude
+      lng: 77.5946,   // Bangalore Longitude
+      energyConsumption: 150,  // kWh
+      energyEfficiency: 85,    // 85% efficiency
+      peakDemand: 300,         // Peak demand in kW
+      location: 'Bangalore',
+      lastUpdate: '2025-04-13 10:00:00',
+    },
+    {
+      id: 3,
+      lat: 19.0760,   // Mumbai Latitude
+      lng: 72.8777,   // Mumbai Longitude
+      energyConsumption: 180,  // kWh
+      energyEfficiency: 78,    // 78% efficiency
+      peakDemand: 400,         // Peak demand in kW
+      location: 'Mumbai',
+      lastUpdate: '2025-04-13 10:00:00',
+    },
+  ],
+};
+
+const App = () => (
+  <div style={{ height: '100vh' }}>
+    <EnergyMap energyData={energyData} />
+  </div>
+);
+
+export default App;
