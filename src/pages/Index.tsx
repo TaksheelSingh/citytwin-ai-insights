@@ -1,6 +1,6 @@
 
 import React from 'react';
-import Dashboard from '@/components/Dashboard';
+import Dashboard from '@/pages/Dashboard';
 import AppLayout from '@/components/layout/AppLayout';
 
 const Index = () => {

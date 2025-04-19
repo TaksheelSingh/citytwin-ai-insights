@@ -1,0 +1,746 @@
+[
+  {
+    "date": "2024-06-01",
+    "aqi": 69,
+    "prediction": 71,
+    "pollutants": [
+      {
+        "name": "PM2.5",
+        "level": 25
+      },
+      {
+        "name": "PM10",
+        "level": 48
+      },
+      {
+        "name": "NO2",
+        "level": 11
+      },
+      {
+        "name": "SO2",
+        "level": 6
+      }
+    ],
+    "primary_pollutant": "PM10"
+  },
+  {
+    "date": "2024-06-02",
+    "aqi": 133,
+    "prediction": 138,
+    "pollutants": [
+      {
+        "name": "PM2.5",
+        "level": 35
+      },
+      {
+        "name": "PM10",
+        "level": 10
+      },
+      {
+        "name": "NO2",
+        "level": 6
+      },
+      {
+        "name": "SO2",
+        "level": 13
+      }
+    ],
+    "primary_pollutant": "PM2.5"
+  },
+  {
+    "date": "2024-06-03",
+    "aqi": 72,
+    "prediction": 76,
+    "pollutants": [
+      {
+        "name": "PM2.5",
+        "level": 37
+      },
+      {
+        "name": "PM10",
+        "level": 39
+      },
+      {
+        "name": "NO2",
+        "level": 22
+      },
+      {
+        "name": "SO2",
+        "level": 11
+      }
+    ],
+    "primary_pollutant": "PM10"
+  },
+  {
+    "date": "2024-06-04",
+    "aqi": 43,
+    "prediction": 48,
+    "pollutants": [
+      {
+        "name": "PM2.5",
+        "level": 38
+      },
+      {
+        "name": "PM10",
+        "level": 34
+      },
+      {
+        "name": "NO2",
+        "level": 22
+      },
+      {
+        "name": "SO2",
+        "level": 10
+      }
+    ],
+    "primary_pollutant": "PM2.5"
+  },
+  {
+    "date": "2024-06-05",
+    "aqi": 44,
+    "prediction": 45,
+    "pollutants": [
+      {
+        "name": "PM2.5",
+        "level": 58
+      },
+      {
+        "name": "PM10",
+        "level": 11
+      },
+      {
+        "name": "NO2",
+        "level": 20
+      },
+      {
+        "name": "SO2",
+        "level": 15
+      }
+    ],
+    "primary_pollutant": "PM2.5"
+  },
+  {
+    "date": "2024-06-06",
+    "aqi": 92,
+    "prediction": 92,
+    "pollutants": [
+      {
+        "name": "PM2.5",
+        "level": 58
+      },
+      {
+        "name": "PM10",
+        "level": 25
+      },
+      {
+        "name": "NO2",
+        "level": 23
+      },
+      {
+        "name": "SO2",
+        "level": 8
+      }
+    ],
+    "primary_pollutant": "PM2.5"
+  },
+  {
+    "date": "2024-06-07",
+    "aqi": 146,
+    "prediction": 136,
+    "pollutants": [
+      {
+        "name": "PM2.5",
+        "level": 43
+      },
+      {
+        "name": "PM10",
+        "level": 47
+      },
+      {
+        "name": "NO2",
+        "level": 7
+      },
+      {
+        "name": "SO2",
+        "level": 6
+      }
+    ],
+    "primary_pollutant": "PM10"
+  },
+  {
+    "date": "2024-06-08",
+    "aqi": 121,
+    "prediction": 114,
+    "pollutants": [
+      {
+        "name": "PM2.5",
+        "level": 48
+      },
+      {
+        "name": "PM10",
+        "level": 27
+      },
+      {
+        "name": "NO2",
+        "level": 21
+      },
+      {
+        "name": "SO2",
+        "level": 17
+      }
+    ],
+    "primary_pollutant": "PM2.5"
+  },
+  {
+    "date": "2024-06-09",
+    "aqi": 130,
+    "prediction": 138,
+    "pollutants": [
+      {
+        "name": "PM2.5",
+        "level": 60
+      },
+      {
+        "name": "PM10",
+        "level": 48
+      },
+      {
+        "name": "NO2",
+        "level": 29
+      },
+      {
+        "name": "SO2",
+        "level": 8
+      }
+    ],
+    "primary_pollutant": "PM2.5"
+  },
+  {
+    "date": "2024-06-10",
+    "aqi": 137,
+    "prediction": 127,
+    "pollutants": [
+      {
+        "name": "PM2.5",
+        "level": 59
+      },
+      {
+        "name": "PM10",
+        "level": 35
+      },
+      {
+        "name": "NO2",
+        "level": 25
+      },
+      {
+        "name": "SO2",
+        "level": 6
+      }
+    ],
+    "primary_pollutant": "PM2.5"
+  },
+  {
+    "date": "2024-06-11",
+    "aqi": 105,
+    "prediction": 104,
+    "pollutants": [
+      {
+        "name": "PM2.5",
+        "level": 54
+      },
+      {
+        "name": "PM10",
+        "level": 37
+      },
+      {
+        "name": "NO2",
+        "level": 23
+      },
+      {
+        "name": "SO2",
+        "level": 12
+      }
+    ],
+    "primary_pollutant": "PM2.5"
+  },
+  {
+    "date": "2024-06-12",
+    "aqi": 101,
+    "prediction": 94,
+    "pollutants": [
+      {
+        "name": "PM2.5",
+        "level": 51
+      },
+      {
+        "name": "PM10",
+        "level": 20
+      },
+      {
+        "name": "NO2",
+        "level": 9
+      },
+      {
+        "name": "SO2",
+        "level": 16
+      }
+    ],
+    "primary_pollutant": "PM2.5"
+  },
+  {
+    "date": "2024-06-13",
+    "aqi": 101,
+    "prediction": 109,
+    "pollutants": [
+      {
+        "name": "PM2.5",
+        "level": 36
+      },
+      {
+        "name": "PM10",
+        "level": 49
+      },
+      {
+        "name": "NO2",
+        "level": 23
+      },
+      {
+        "name": "SO2",
+        "level": 10
+      }
+    ],
+    "primary_pollutant": "PM10"
+  },
+  {
+    "date": "2024-06-14",
+    "aqi": 100,
+    "prediction": 107,
+    "pollutants": [
+      {
+        "name": "PM2.5",
+        "level": 27
+      },
+      {
+        "name": "PM10",
+        "level": 28
+      },
+      {
+        "name": "NO2",
+        "level": 23
+      },
+      {
+        "name": "SO2",
+        "level": 12
+      }
+    ],
+    "primary_pollutant": "PM10"
+  },
+  {
+    "date": "2024-06-15",
+    "aqi": 120,
+    "prediction": 117,
+    "pollutants": [
+      {
+        "name": "PM2.5",
+        "level": 56
+      },
+      {
+        "name": "PM10",
+        "level": 17
+      },
+      {
+        "name": "NO2",
+        "level": 6
+      },
+      {
+        "name": "SO2",
+        "level": 18
+      }
+    ],
+    "primary_pollutant": "PM2.5"
+  },
+  {
+    "date": "2024-06-16",
+    "aqi": 86,
+    "prediction": 78,
+    "pollutants": [
+      {
+        "name": "PM2.5",
+        "level": 40
+      },
+      {
+        "name": "PM10",
+        "level": 11
+      },
+      {
+        "name": "NO2",
+        "level": 6
+      },
+      {
+        "name": "SO2",
+        "level": 14
+      }
+    ],
+    "primary_pollutant": "PM2.5"
+  },
+  {
+    "date": "2024-06-17",
+    "aqi": 140,
+    "prediction": 138,
+    "pollutants": [
+      {
+        "name": "PM2.5",
+        "level": 47
+      },
+      {
+        "name": "PM10",
+        "level": 27
+      },
+      {
+        "name": "NO2",
+        "level": 30
+      },
+      {
+        "name": "SO2",
+        "level": 2
+      }
+    ],
+    "primary_pollutant": "PM2.5"
+  },
+  {
+    "date": "2024-06-18",
+    "aqi": 100,
+    "prediction": 102,
+    "pollutants": [
+      {
+        "name": "PM2.5",
+        "level": 41
+      },
+      {
+        "name": "PM10",
+        "level": 14
+      },
+      {
+        "name": "NO2",
+        "level": 22
+      },
+      {
+        "name": "SO2",
+        "level": 20
+      }
+    ],
+    "primary_pollutant": "PM2.5"
+  },
+  {
+    "date": "2024-06-19",
+    "aqi": 105,
+    "prediction": 97,
+    "pollutants": [
+      {
+        "name": "PM2.5",
+        "level": 30
+      },
+      {
+        "name": "PM10",
+        "level": 25
+      },
+      {
+        "name": "NO2",
+        "level": 10
+      },
+      {
+        "name": "SO2",
+        "level": 7
+      }
+    ],
+    "primary_pollutant": "PM2.5"
+  },
+  {
+    "date": "2024-06-20",
+    "aqi": 108,
+    "prediction": 105,
+    "pollutants": [
+      {
+        "name": "PM2.5",
+        "level": 60
+      },
+      {
+        "name": "PM10",
+        "level": 47
+      },
+      {
+        "name": "NO2",
+        "level": 13
+      },
+      {
+        "name": "SO2",
+        "level": 7
+      }
+    ],
+    "primary_pollutant": "PM2.5"
+  },
+  {
+    "date": "2024-06-21",
+    "aqi": 97,
+    "prediction": 107,
+    "pollutants": [
+      {
+        "name": "PM2.5",
+        "level": 29
+      },
+      {
+        "name": "PM10",
+        "level": 11
+      },
+      {
+        "name": "NO2",
+        "level": 28
+      },
+      {
+        "name": "SO2",
+        "level": 6
+      }
+    ],
+    "primary_pollutant": "PM2.5"
+  },
+  {
+    "date": "2024-06-22",
+    "aqi": 106,
+    "prediction": 109,
+    "pollutants": [
+      {
+        "name": "PM2.5",
+        "level": 23
+      },
+      {
+        "name": "PM10",
+        "level": 50
+      },
+      {
+        "name": "NO2",
+        "level": 27
+      },
+      {
+        "name": "SO2",
+        "level": 19
+      }
+    ],
+    "primary_pollutant": "PM10"
+  },
+  {
+    "date": "2024-06-23",
+    "aqi": 107,
+    "prediction": 116,
+    "pollutants": [
+      {
+        "name": "PM2.5",
+        "level": 51
+      },
+      {
+        "name": "PM10",
+        "level": 38
+      },
+      {
+        "name": "NO2",
+        "level": 16
+      },
+      {
+        "name": "SO2",
+        "level": 12
+      }
+    ],
+    "primary_pollutant": "PM2.5"
+  },
+  {
+    "date": "2024-06-24",
+    "aqi": 46,
+    "prediction": 47,
+    "pollutants": [
+      {
+        "name": "PM2.5",
+        "level": 55
+      },
+      {
+        "name": "PM10",
+        "level": 12
+      },
+      {
+        "name": "NO2",
+        "level": 22
+      },
+      {
+        "name": "SO2",
+        "level": 6
+      }
+    ],
+    "primary_pollutant": "PM2.5"
+  },
+  {
+    "date": "2024-06-25",
+    "aqi": 60,
+    "prediction": 67,
+    "pollutants": [
+      {
+        "name": "PM2.5",
+        "level": 26
+      },
+      {
+        "name": "PM10",
+        "level": 18
+      },
+      {
+        "name": "NO2",
+        "level": 23
+      },
+      {
+        "name": "SO2",
+        "level": 9
+      }
+    ],
+    "primary_pollutant": "PM2.5"
+  },
+  {
+    "date": "2024-06-26",
+    "aqi": 138,
+    "prediction": 140,
+    "pollutants": [
+      {
+        "name": "PM2.5",
+        "level": 37
+      },
+      {
+        "name": "PM10",
+        "level": 46
+      },
+      {
+        "name": "NO2",
+        "level": 25
+      },
+      {
+        "name": "SO2",
+        "level": 10
+      }
+    ],
+    "primary_pollutant": "PM10"
+  },
+  {
+    "date": "2024-06-27",
+    "aqi": 46,
+    "prediction": 41,
+    "pollutants": [
+      {
+        "name": "PM2.5",
+        "level": 47
+      },
+      {
+        "name": "PM10",
+        "level": 37
+      },
+      {
+        "name": "NO2",
+        "level": 12
+      },
+      {
+        "name": "SO2",
+        "level": 9
+      }
+    ],
+    "primary_pollutant": "PM2.5"
+  },
+  {
+    "date": "2024-06-28",
+    "aqi": 52,
+    "prediction": 54,
+    "pollutants": [
+      {
+        "name": "PM2.5",
+        "level": 43
+      },
+      {
+        "name": "PM10",
+        "level": 26
+      },
+      {
+        "name": "NO2",
+        "level": 19
+      },
+      {
+        "name": "SO2",
+        "level": 15
+      }
+    ],
+    "primary_pollutant": "PM2.5"
+  },
+  {
+    "date": "2024-06-29",
+    "aqi": 77,
+    "prediction": 72,
+    "pollutants": [
+      {
+        "name": "PM2.5",
+        "level": 54
+      },
+      {
+        "name": "PM10",
+        "level": 38
+      },
+      {
+        "name": "NO2",
+        "level": 16
+      },
+      {
+        "name": "SO2",
+        "level": 11
+      }
+    ],
+    "primary_pollutant": "PM2.5"
+  },
+  {
+    "date": "2024-06-30",
+    "aqi": 123,
+    "prediction": 121,
+    "pollutants": [
+      {
+        "name": "PM2.5",
+        "level": 37
+      },
+      {
+        "name": "PM10",
+        "level": 32
+      },
+      {
+        "name": "NO2",
+        "level": 15
+      },
+      {
+        "name": "SO2",
+        "level": 11
+      }
+    ],
+    "primary_pollutant": "PM2.5"
+  },
+  {
+    "date": "2024-07-01",
+    "aqi": 112,
+    "prediction": 116,
+    "pollutants": [
+      {
+        "name": "PM2.5",
+        "level": 45
+      },
+      {
+        "name": "PM10",
+        "level": 20
+      },
+      {
+        "name": "NO2",
+        "level": 21
+      },
+      {
+        "name": "SO2",
+        "level": 19
+      }
+    ],
+    "primary_pollutant": "PM2.5"
+  }
+]

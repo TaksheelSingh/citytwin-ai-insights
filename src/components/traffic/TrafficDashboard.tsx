@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { fetchTrafficData } from '@/api/traffic';
 import TrafficMap from './TrafficMap';
 import TrafficChart from './TrafficChart';
 import TrafficStats from './TrafficStats';
 import TrafficFilters from './TrafficFilters';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { AlertCircle } from 'lucide-react';
-import Dropdown from '@/components/Dropdown'; // Assuming Dropdown component exists
+import Dropdown from '@/components/Dropdown';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'; // Tabs import
 
 const TrafficDashboard = () => {
   const [city, setCity] = useState<string>('delhi'); // Default city
   const { data, isLoading, error } = useQuery({
-    queryKey: ['trafficData', city], // Include city to refetch data when it changes
+    queryKey: ['trafficData', city], // Include city in the query key to trigger refetch when city changes
     queryFn: () => fetchTrafficData(city), // Fetch traffic data based on selected city
   });
 
@@ -45,6 +45,7 @@ const TrafficDashboard = () => {
 
   return (
     <div className="space-y-6">
+      {/* Header Section */}
       <div className="flex flex-col md:flex-row justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold tracking-tight">Traffic Analysis</h1>
@@ -52,9 +53,10 @@ const TrafficDashboard = () => {
             Real-time traffic flow and predictive congestion data.
           </p>
         </div>
-        <Dropdown setCity={setCity} /> {/* Add the dropdown for city selection */}
+        <Dropdown setCity={setCity} /> {/* Dropdown for city selection */}
       </div>
 
+      {/* Stats Cards Section */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {data?.stats.map((stat, index) => (
           <Card key={index}>
@@ -69,6 +71,7 @@ const TrafficDashboard = () => {
         ))}
       </div>
 
+      {/* Tabs for Traffic Map and Time Analysis */}
       <Tabs defaultValue="map">
         <TabsList className="grid w-full grid-cols-2 lg:w-[400px]">
           <TabsTrigger value="map">Traffic Map</TabsTrigger>
